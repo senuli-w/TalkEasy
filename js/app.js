@@ -310,7 +310,7 @@ function renderMessages() {
                     <span></span>
                     <span></span>
                 </div>
-                <span style="margin-left: 8px; color: #a1a1aa;">Lila is typing…</span>
+                <span style="margin-left: 8px; color: #a1a1aa;">Lia is typing…</span>
             </div>
         `;
     }
@@ -345,7 +345,7 @@ async function addMessage(role, text) {
             speak(aiResponse);
         } catch (error) {
             console.error('Chat error:', error);
-            const errorMsg = `I'm having trouble connecting right now. ${error.message || 'Please try again in a moment.'}`;
+            const errorMsg = "I'm having trouble connecting right now. Please try again in a moment.";
             messages.push({ role: 'ai', text: errorMsg });
             speak(errorMsg);
         } finally {
@@ -362,11 +362,11 @@ async function addMessage(role, text) {
 
 function updateChatStatus() {
     if (isThinking) {
-        chatStatusText.textContent = 'Lila is thinking…';
+        chatStatusText.textContent = 'Lia is thinking…';
     } else if (isRecording) {
         chatStatusText.textContent = 'Listening…';
     } else {
-        chatStatusText.textContent = 'Lila is online';
+        chatStatusText.textContent = 'Lia is online';
     }
 }
 

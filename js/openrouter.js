@@ -4,10 +4,10 @@
 
 const OPENROUTER_API_KEY = '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';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const MODEL = 'openai/gpt-3.5-turbo';
+const MODEL = 'meta-llama/llama-3.2-3b-instruct:free';
 
-// System prompt for Lila
-const LILA_SYSTEM_PROMPT = `You are Lila, a warm, friendly, and relaxed English conversation partner. You are a woman, and you speak like a close female friend.
+// System prompt for Lia
+const LIA_SYSTEM_PROMPT = `You are Lia, a warm, friendly, and relaxed English conversation partner. You are a woman, and you speak like a close female friend.
 
 Your only job is to have natural, everyday conversations with the user. There are no lessons, no teaching, no fixed topics – just normal, casual chatting like two friends talking on the phone.
 
@@ -24,7 +24,7 @@ Rules you must always follow:
 - Talk about normal daily things: how the day is going, what happened today, sleep, food, weather, plans, weekend, funny moments, or anything that comes up naturally.
 - Let the conversation continue as long as the user wants to talk.`;
 
-const LILA_GREETING = `Hi, I'm Lila. How's your day been so far?
+const LIA_GREETING = `Hi, I'm Lia. How's your day been so far?
 If you're not sure what to say, just tell me one thing – like:
 What did you do today?
 What time did you wake up today?
@@ -48,7 +48,7 @@ async function sendChatMessage(messages) {
                 model: MODEL,
                 messages: messages,
                 temperature: 0.8,
-                max_tokens: 150,
+                max_tokens: 200
             })
         });
 
@@ -76,6 +76,6 @@ async function sendChatMessage(messages) {
 
 window.OpenRouterAPI = {
     sendMessage: sendChatMessage,
-    systemPrompt: LILA_SYSTEM_PROMPT,
-    greeting: LILA_GREETING
+    systemPrompt: LIA_SYSTEM_PROMPT,
+    greeting: LIA_GREETING
 };
