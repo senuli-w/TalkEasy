@@ -46,7 +46,9 @@ let currentLesson = null;
 let isRecording = false;
 let isTextMode = false;
 let messages = [];
+let chatHistory = []; // For API messages
 let recognition = null;
+let isThinking = false;
 
 // ========================================
 // THEME TOGGLE
@@ -264,11 +266,16 @@ function openChat(lesson, label) {
     
     // Reset chat state
     isTextMode = false;
+    isThinking = false;
     textInputRow.style.display = 'none';
     
-    // Create greeting message
-    const greeting = `Hi! I'm Sam, your English teacher. 😊 Today we talk about ${lesson.topic}. Let's start!`;
+    // Create greeting message using Lila's greeting
+    const greeting = window.OpenRouterAPI.greeting;
     messages = [{ role: 'ai', text: greeting }];
+    chatHistory = [
+        { role: 'system', content: window.OpenRouterAPI.systemPrompt },
+        { role: 'assistant', content: greeting }
+    ];
     renderMessages();
     
     // Speak greeting
@@ -288,22 +295,78 @@ function closeChat() {
 }
 
 function renderMessages() {
-    chatMessages.innerHTML = messages.map(msg => `
+    let html = messages.map(msg => `
         <div class="message message--${msg.role}">
             ${msg.text}
         </div>
     `).join('');
     
+    // Add thinking indicator if AI is thinking
+    if (isThinking) {
+        html += `
+            <div class="message message--ai message--typing">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span style="margin-left: 8px; color: #a1a1aa;">Lila is typing…</span>
+            </div>
+        `;
+    }
+    
+    chatMessages.innerHTML = html;
+    
     // Scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function addMessage(role, text) {
+async function addMessage(role, text) {
     messages.push({ role, text });
-    renderMessages();
     
-    if (role === 'ai') {
+    if (role === 'user') {
+        // Add user message to chat history
+        chatHistory.push({ role: 'user', content: text });
+        
+        // Show thinking state
+        isThinking = true;
+        updateChatStatus();
+        renderMessages();
+        
+        try {
+            // Get AI response from OpenRouter
+            const aiResponse = await window.OpenRouterAPI.sendMessage(chatHistory);
+            
+            // Add AI response to messages and history
+            messages.push({ role: 'ai', text: aiResponse });
+            chatHistory.push({ role: 'assistant', content: aiResponse });
+            
+            // Speak AI response
+            speak(aiResponse);
+        } catch (error) {
+            console.error('Chat error:', error);
+            const errorMsg = `I'm having trouble connecting right now. ${error.message || 'Please try again in a moment.'}`;
+            messages.push({ role: 'ai', text: errorMsg });
+            speak(errorMsg);
+        } finally {
+            isThinking = false;
+            updateChatStatus();
+            renderMessages();
+        }
+    } else {
+        // AI message
+        renderMessages();
         speak(text);
+    }
+}
+
+function updateChatStatus() {
+    if (isThinking) {
+        chatStatusText.textContent = 'Lila is thinking…';
+    } else if (isRecording) {
+        chatStatusText.textContent = 'Listening…';
+    } else {
+        chatStatusText.textContent = 'Lila is online';
     }
 }
 
@@ -347,11 +410,6 @@ function startRecording() {
     recognition.onresult = (event) => {
         const text = event.results[0][0].transcript;
         addMessage('user', text);
-        
-        // Simple AI response (no backend)
-        setTimeout(() => {
-            addMessage('ai', "Great job! Keep practicing. Can you tell me more?");
-        }, 1000);
     };
     
     recognition.onerror = (event) => {
@@ -391,7 +449,7 @@ function updateRecordingUI() {
     micBtn.classList.toggle('recording', isRecording);
     micPulse.classList.toggle('active', isRecording);
     chatStatusDot.classList.toggle('recording', isRecording);
-    chatStatusText.textContent = isRecording ? 'Listening...' : 'AI Partner Online';
+    updateChatStatus();
 }
 
 // Chat button handlers
@@ -412,11 +470,6 @@ sendBtn.addEventListener('click', () => {
     if (text) {
         addMessage('user', text);
         chatTextInput.value = '';
-        
-        // Simple AI response
-        setTimeout(() => {
-            addMessage('ai', "Great job! Keep practicing. Can you tell me more?");
-        }, 1000);
     }
 });
 
