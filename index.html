@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>TalkEasy</title>
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" />
+    <link rel="apple-touch-icon" href="./assets/icon.svg" />
+
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Header -->
+      <header class="topbar">
+        <div class="topbar__left">
+          <div class="brand">
+            <div class="brand__logo" aria-hidden="true"></div>
+            <div class="brand__text">
+              <div class="brand__title">TalkEasy</div>
+              <div class="brand__subtitle">English practice</div>
+            </div>
+          </div>
+        </div>
+        <div class="topbar__right">
+          <button class="btn btn--ghost" id="installBtn" type="button" hidden aria-label="Install app">
+            ↓
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main">
+        <!-- Learn Tab -->
+        <section class="page" id="page-learn" data-page="learn">
+          <div class="page__header">
+            <h1>Learn</h1>
+            <p class="muted">Master English step by step.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Lesson Path</div>
+            <div class="card__body">
+              <div class="lesson-item">
+                <div class="lesson-icon done">✓</div>
+                <div class="lesson-info">
+                  <h3>Basics</h3>
+                  <p>Learn simple greetings and introductions.</p>
+                </div>
+              </div>
+
+              <div class="lesson-item current">
+                <div class="lesson-icon current">•</div>
+                <div class="lesson-info">
+                  <h3>Greetings</h3>
+                  <p>Daily conversations and polite phrases.</p>
+                </div>
+              </div>
+
+              <div class="lesson-item">
+                <div class="lesson-icon locked">🔒</div>
+                <div class="lesson-info">
+                  <h3>Work</h3>
+                  <p>Professional English and workplace terms.</p>
+                </div>
+              </div>
+
+              <div class="lesson-item">
+                <div class="lesson-icon locked">🔒</div>
+                <div class="lesson-info">
+                  <h3>Travel</h3>
+                  <p>Phrases for travelers and explorers.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Talk Tab -->
+        <section class="page" id="page-talk" data-page="talk" hidden>
+          <div class="page__header">
+            <h1>Talk</h1>
+            <p class="muted">Practice speaking with Sam.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Practice Sessions</div>
+            <div class="card__body">
+              <div class="session-item">
+                <div class="session-date">Today</div>
+                <div class="session-status">Ready to practice</div>
+                <button class="btn btn--primary" type="button">Start</button>
+              </div>
+
+              <div class="session-item">
+                <div class="session-date">Yesterday</div>
+                <div class="session-status">Completed</div>
+                <button class="btn btn--ghost" type="button">Review</button>
+              </div>
+
+              <div class="session-item">
+                <div class="session-date">2 days ago</div>
+                <div class="session-status">Completed</div>
+                <button class="btn btn--ghost" type="button">Review</button>
+              </div>
+
+              <div class="session-item">
+                <div class="session-date">3 days ago</div>
+                <div class="session-status">Completed</div>
+                <button class="btn btn--ghost" type="button">Review</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile Tab -->
+        <section class="page" id="page-profile" data-page="profile" hidden>
+          <div class="page__header">
+            <h1>Profile</h1>
+            <p class="muted">Your learning journey.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Statistics</div>
+            <div class="card__body">
+              <div class="stat">
+                <div class="stat__number">12</div>
+                <div class="stat__label">Lessons completed</div>
+              </div>
+              <div class="stat">
+                <div class="stat__number">5</div>
+                <div class="stat__label">Day streak</div>
+              </div>
+              <div class="stat">
+                <div class="stat__number">347</div>
+                <div class="stat__label">XP earned</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__title">Account</div>
+            <div class="card__body">
+              <p class="muted">You're using TalkEasy v1.0</p>
+              <p class="muted">Built with HTML, CSS, and JavaScript.</p>
+              <p class="muted">Hosted on GitHub Pages.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottomNav" aria-label="Main navigation">
+        <button class="tab is-active" data-tab="learn" type="button">
+          <span class="tab__dot"></span>
+          Learn
+        </button>
+        <button class="tab" data-tab="talk" type="button">
+          <span class="tab__dot"></span>
+          Talk
+        </button>
+        <button class="tab" data-tab="profile" type="button">
+          <span class="tab__dot"></span>
+          Profile
+        </button>
+      </nav>
+    </div>
+
+    <script src="./js/app.js"></script>
+  </body>
+</html>

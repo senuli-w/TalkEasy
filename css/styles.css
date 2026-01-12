@@ -1,0 +1,516 @@
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: linear-gradient(135deg, #0b1220 0%, #1a2940 50%, #0f1f35 100%);
+  color: #e4e6eb;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ========================================
+   APP LAYOUT
+   ======================================== */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 60px;
+  padding-bottom: 72px;
+}
+
+/* ========================================
+   TOPBAR / HEADER
+   ======================================== */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.95) 0%, rgba(26, 41, 64, 0.8) 100%);
+  border-bottom: 1px solid rgba(228, 230, 235, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.topbar__left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Brand Section */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.brand__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: bold;
+  color: white;
+}
+
+.brand__logo::before {
+  content: "T";
+  font-size: 20px;
+}
+
+.brand__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.brand__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e4e6eb;
+  letter-spacing: -0.3px;
+}
+
+.brand__subtitle {
+  font-size: 12px;
+  color: #8a8d97;
+  margin-top: 2px;
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: rgba(228, 230, 235, 0.2);
+  border-radius: 3px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: rgba(228, 230, 235, 0.3);
+}
+
+/* Page Container */
+
+.page {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.page[hidden] {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page__header {
+  margin-bottom: 24px;
+}
+
+.page__header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e4e6eb;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.muted {
+  color: #8a8d97;
+  font-size: 14px;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+
+.card {
+  background: rgba(26, 41, 64, 0.4);
+  border: 1px solid rgba(228, 230, 235, 0.08);
+  border-radius: 12px;
+  padding: 0;
+  margin-bottom: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.card__title {
+  padding: 16px;
+  border-bottom: 1px solid rgba(228, 230, 235, 0.08);
+  font-weight: 600;
+  font-size: 14px;
+  color: #e4e6eb;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card__body {
+  padding: 16px;
+}
+
+/* ========================================
+   LESSON ITEMS (LEARN TAB)
+   ======================================== */
+
+.lesson-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(102, 126, 234, 0.05);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  transition: all 0.2s ease;
+}
+
+.lesson-item:last-child {
+  margin-bottom: 0;
+}
+
+.lesson-item:hover {
+  background: rgba(102, 126, 234, 0.08);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.lesson-item.current {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.lesson-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.lesson-icon.done {
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  color: #4caf50;
+}
+
+.lesson-icon.current {
+  background: rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(102, 126, 234, 0.5);
+  color: #667eea;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.lesson-icon.locked {
+  background: rgba(156, 156, 156, 0.1);
+  border: 1px solid rgba(156, 156, 156, 0.2);
+  color: #9c9c9c;
+}
+
+.lesson-info {
+  flex: 1;
+}
+
+.lesson-info h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e4e6eb;
+  margin-bottom: 4px;
+}
+
+.lesson-info p {
+  font-size: 12px;
+  color: #8a8d97;
+}
+
+/* ========================================
+   SESSION ITEMS (TALK TAB)
+   ======================================== */
+
+.session-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid rgba(228, 230, 235, 0.08);
+  gap: 12px;
+}
+
+.session-item:last-child {
+  border-bottom: none;
+}
+
+.session-date {
+  font-weight: 500;
+  color: #e4e6eb;
+  font-size: 13px;
+  min-width: 80px;
+}
+
+.session-status {
+  flex: 1;
+  color: #8a8d97;
+  font-size: 12px;
+}
+
+/* ========================================
+   STATS (PROFILE TAB)
+   ======================================== */
+
+.stat {
+  text-align: center;
+  padding: 20px 16px;
+  border-right: 1px solid rgba(228, 230, 235, 0.08);
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.card__body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card__body > .stat {
+  flex: 1;
+  min-width: 100px;
+}
+
+.stat__number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 4px;
+}
+
+.stat__label {
+  font-size: 12px;
+  color: #8a8d97;
+  text-transform: capitalize;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.btn--primary:active {
+  opacity: 0.9;
+  transform: scale(0.95);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #667eea;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.btn--ghost:active {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* ========================================
+   BOTTOM NAVIGATION
+   ======================================== */
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.95) 0%, rgba(26, 41, 64, 0.9) 100%);
+  border-top: 1px solid rgba(228, 230, 235, 0.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: #8a8d97;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-radius: 0;
+}
+
+.tab:active {
+  transform: scale(0.95);
+}
+
+.tab.is-active {
+  color: #667eea;
+}
+
+.tab__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.tab.is-active .tab__dot {
+  background: #667eea;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+  width: 6px;
+  height: 6px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 480px) {
+  .brand__subtitle {
+    display: none;
+  }
+
+  .brand__title {
+    font-size: 15px;
+  }
+
+  .page__header h1 {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 32px 24px;
+  }
+
+  .card {
+    border-radius: 16px;
+  }
+
+  .topbar {
+    padding: 0 24px;
+  }
+
+  .bottomNav {
+    display: none;
+  }
+
+  .app {
+    padding-top: 80px;
+    padding-bottom: 0;
+  }
+
+  .topbar {
+    height: 80px;
+  }
+
+  .brand__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand__subtitle {
+    display: block;
+  }
+}
