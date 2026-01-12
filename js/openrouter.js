@@ -2,7 +2,7 @@
 // OPENROUTER API CONFIGURATION
 // ========================================
 
-const OPENROUTER_API_KEY = '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';
+const OPENROUTER_API_KEY = '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';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const MODEL = 'meta-llama/llama-3.2-3b-instruct:free';
 
