@@ -1,174 +1,249 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b1220" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#f43f5e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./assets/icon.svg">
+    <link rel="apple-touch-icon" href="./assets/icon-192.png">
     <title>TalkEasy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div id="root">
+        <div class="app" id="app">
+            <!-- Header -->
+            <header class="header">
+                <div class="header__stats">
+                    <div class="stat-item stat-item--flame">
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 23c-3.6 0-8-2.4-8-8.5C4 8 10 3 11 1c0 4 2 7 3 8 2-1 3-3 3-3s2 4 2 8.5c0 6.1-4.4 8.5-8 8.5z"/>
+                        </svg>
+                        <span class="stat-value">12</span>
+                    </div>
+                    <div class="stat-item stat-item--star">
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span class="stat-value">450</span>
+                    </div>
+                    <div class="stat-item stat-item--zap">
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                        <span class="stat-value">2350</span>
+                    </div>
+                </div>
+                <div class="header__actions">
+                    <button class="icon-btn" id="installBtn" style="display:none" aria-label="Install app">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                    </button>
+                    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
 
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" href="./assets/icon.svg" />
-    <link rel="apple-touch-icon" href="./assets/icon.svg" />
+            <!-- Main Content -->
+            <main class="main" id="mainContent">
+                <!-- Learn Page -->
+                <section class="page page--learn active" id="page-learn">
+                    <div class="lessons-path" id="lessonsPath">
+                        <!-- Lessons will be injected here -->
+                    </div>
+                </section>
 
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-  <body>
-    <div class="app">
-      <!-- Header -->
-      <header class="topbar">
-        <div class="topbar__left">
-          <div class="brand">
-            <div class="brand__logo" aria-hidden="true"></div>
-            <div class="brand__text">
-              <div class="brand__title">TalkEasy</div>
-              <div class="brand__subtitle">English practice</div>
-            </div>
-          </div>
+                <!-- Talk Page -->
+                <section class="page page--talk" id="page-talk">
+                    <div class="talk-header">
+                        <div class="talk-header__text">
+                            <h1 class="talk-title">Practice</h1>
+                            <p class="talk-subtitle">Last 5 practice days</p>
+                        </div>
+                        <div class="talk-header__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" x2="12" y1="19" y2="22"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="sessions-list" id="sessionsList">
+                        <!-- Sessions will be injected here -->
+                    </div>
+                </section>
+
+                <!-- Profile Page -->
+                <section class="page page--profile" id="page-profile">
+                    <div class="profile-header">
+                        <div class="avatar-wrapper">
+                            <div class="avatar">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Lucky" alt="Avatar">
+                            </div>
+                            <div class="avatar-badge">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 15l-2 5-3-1 1 4h8l1-4-3 1-2-5z"/>
+                                    <path d="M20 9l-1.5-2.5L21 4l-4 .5L15 2l-1.5 2.5h-3L9 2 7 4.5 3 4l2.5 2.5L4 9l3 1 2 3h6l2-3 3-1z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h2 class="profile-name">Alex Thompson</h2>
+                        <span class="profile-level">Level 24 • Pro Learner</span>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card stat-card--xp">
+                            <div class="stat-card__header">
+                                <h3 class="stat-card__title stat-card__title--rose">XP Streak</h3>
+                                <span class="stat-card__meta">Target: 50</span>
+                            </div>
+                            <div class="chart" id="xpChart">
+                                <!-- Chart bars will be injected -->
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card--words">
+                            <div class="stat-card__header">
+                                <h3 class="stat-card__title stat-card__title--purple">New Words</h3>
+                                <span class="stat-card__meta">+12 Today</span>
+                            </div>
+                            <div class="chart" id="wordsChart">
+                                <!-- Chart bars will be injected -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="achievements-section">
+                        <h3 class="achievements-title">Achievements</h3>
+                        <div class="achievements-list" id="achievementsList">
+                            <!-- Achievements will be injected -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Voice Chat Page (hidden by default) -->
+                <section class="page page--chat" id="page-chat">
+                    <header class="chat-header">
+                        <button class="chat-back" id="chatBackBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                        </button>
+                        <div class="chat-header__center">
+                            <p class="chat-header__title">Live Practice</p>
+                            <p class="chat-header__subtitle" id="chatSessionLabel">Today</p>
+                            <div class="chat-status">
+                                <span class="chat-status__dot"></span>
+                                <span class="chat-status__text" id="chatStatusText">AI Partner Online</span>
+                            </div>
+                        </div>
+                        <div class="chat-header__spacer"></div>
+                    </header>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will be injected -->
+                    </div>
+
+                    <div class="chat-input-area">
+                        <div class="text-input-row" id="textInputRow" style="display:none">
+                            <input type="text" class="chat-text-input" id="chatTextInput" placeholder="Type your message…">
+                            <button class="send-btn" id="sendBtn">Send</button>
+                        </div>
+                        
+                        <div class="chat-controls">
+                            <div class="mic-wrapper">
+                                <div class="mic-pulse" id="micPulse"></div>
+                                <button class="mic-btn" id="micBtn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                        <line x1="12" x2="12" y1="19" y2="22"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="chat-actions">
+                                <button class="chat-action-btn" id="textModeBtn">
+                                    <div class="chat-action-btn__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                            <path d="M6 8h.001"/>
+                                            <path d="M10 8h.001"/>
+                                            <path d="M14 8h.001"/>
+                                            <path d="M18 8h.001"/>
+                                            <path d="M8 12h.001"/>
+                                            <path d="M12 12h.001"/>
+                                            <path d="M16 12h.001"/>
+                                            <path d="M7 16h10"/>
+                                        </svg>
+                                    </div>
+                                    <span>Text</span>
+                                </button>
+                                <button class="chat-action-btn" id="endChatBtn">
+                                    <div class="chat-action-btn__icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M18 6 6 18"/>
+                                            <path d="m6 6 12 12"/>
+                                        </svg>
+                                    </div>
+                                    <span>End</span>
+                                </button>
+                            </div>
+                            
+                            <p class="mic-hint">Tap the mic to speak.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav" id="bottomNav">
+                <button class="nav-btn active" data-tab="learn">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                    </svg>
+                    <span class="nav-label">Learn</span>
+                </button>
+                <button class="nav-btn" data-tab="talk">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" x2="12" y1="19" y2="22"/>
+                    </svg>
+                    <span class="nav-label">Talk</span>
+                </button>
+                <button class="nav-btn" data-tab="profile">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profile</span>
+                </button>
+            </nav>
         </div>
-        <div class="topbar__right">
-          <button class="btn btn--ghost" id="installBtn" type="button" hidden aria-label="Install app">
-            ↓
-          </button>
-        </div>
-      </header>
-
-      <!-- Main Content -->
-      <main class="main">
-        <!-- Learn Tab -->
-        <section class="page" id="page-learn" data-page="learn">
-          <div class="page__header">
-            <h1>Learn</h1>
-            <p class="muted">Master English step by step.</p>
-          </div>
-
-          <div class="card">
-            <div class="card__title">Lesson Path</div>
-            <div class="card__body">
-              <div class="lesson-item">
-                <div class="lesson-icon done">✓</div>
-                <div class="lesson-info">
-                  <h3>Basics</h3>
-                  <p>Learn simple greetings and introductions.</p>
-                </div>
-              </div>
-
-              <div class="lesson-item current">
-                <div class="lesson-icon current">•</div>
-                <div class="lesson-info">
-                  <h3>Greetings</h3>
-                  <p>Daily conversations and polite phrases.</p>
-                </div>
-              </div>
-
-              <div class="lesson-item">
-                <div class="lesson-icon locked">🔒</div>
-                <div class="lesson-info">
-                  <h3>Work</h3>
-                  <p>Professional English and workplace terms.</p>
-                </div>
-              </div>
-
-              <div class="lesson-item">
-                <div class="lesson-icon locked">🔒</div>
-                <div class="lesson-info">
-                  <h3>Travel</h3>
-                  <p>Phrases for travelers and explorers.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Talk Tab -->
-        <section class="page" id="page-talk" data-page="talk" hidden>
-          <div class="page__header">
-            <h1>Talk</h1>
-            <p class="muted">Practice speaking with Sam.</p>
-          </div>
-
-          <div class="card">
-            <div class="card__title">Practice Sessions</div>
-            <div class="card__body">
-              <div class="session-item">
-                <div class="session-date">Today</div>
-                <div class="session-status">Ready to practice</div>
-                <button class="btn btn--primary" type="button">Start</button>
-              </div>
-
-              <div class="session-item">
-                <div class="session-date">Yesterday</div>
-                <div class="session-status">Completed</div>
-                <button class="btn btn--ghost" type="button">Review</button>
-              </div>
-
-              <div class="session-item">
-                <div class="session-date">2 days ago</div>
-                <div class="session-status">Completed</div>
-                <button class="btn btn--ghost" type="button">Review</button>
-              </div>
-
-              <div class="session-item">
-                <div class="session-date">3 days ago</div>
-                <div class="session-status">Completed</div>
-                <button class="btn btn--ghost" type="button">Review</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Profile Tab -->
-        <section class="page" id="page-profile" data-page="profile" hidden>
-          <div class="page__header">
-            <h1>Profile</h1>
-            <p class="muted">Your learning journey.</p>
-          </div>
-
-          <div class="card">
-            <div class="card__title">Statistics</div>
-            <div class="card__body">
-              <div class="stat">
-                <div class="stat__number">12</div>
-                <div class="stat__label">Lessons completed</div>
-              </div>
-              <div class="stat">
-                <div class="stat__number">5</div>
-                <div class="stat__label">Day streak</div>
-              </div>
-              <div class="stat">
-                <div class="stat__number">347</div>
-                <div class="stat__label">XP earned</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card__title">Account</div>
-            <div class="card__body">
-              <p class="muted">You're using TalkEasy v1.0</p>
-              <p class="muted">Built with HTML, CSS, and JavaScript.</p>
-              <p class="muted">Hosted on GitHub Pages.</p>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- Bottom Navigation -->
-      <nav class="bottomNav" aria-label="Main navigation">
-        <button class="tab is-active" data-tab="learn" type="button">
-          <span class="tab__dot"></span>
-          Learn
-        </button>
-        <button class="tab" data-tab="talk" type="button">
-          <span class="tab__dot"></span>
-          Talk
-        </button>
-        <button class="tab" data-tab="profile" type="button">
-          <span class="tab__dot"></span>
-          Profile
-        </button>
-      </nav>
     </div>
 
+    <script src="./js/data.js"></script>
     <script src="./js/app.js"></script>
-  </body>
+</body>
 </html>

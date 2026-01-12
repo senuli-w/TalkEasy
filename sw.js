@@ -1,10 +1,12 @@
-const CACHE_NAME = 'talkesy-v1';
+const CACHE_NAME = 'talkeasy-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './css/styles.css',
+  './js/data.js',
   './js/app.js',
   './manifest.webmanifest',
+  './assets/icon.svg',
 ];
 
 // Install event: cache assets
